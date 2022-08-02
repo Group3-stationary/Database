@@ -1,0 +1,363 @@
+USE [Stationery]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category](
+	[CategotyId] [int] IDENTITY(1,1) NOT NULL,
+	[CategotyName] [varchar](100) NOT NULL,
+	[Id_parent] [int] NULL,
+	[Created_at] [datetime] NULL,
+	[Updated_at] [datetime] NULL,
+	[Deleted_at] [datetime] NULL,
+ CONSTRAINT [PK__Category__2A863D5D3CEFB49A] PRIMARY KEY CLUSTERED 
+(
+	[CategotyId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Employee]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employee](
+	[EmployeeId] [varchar](255) NOT NULL,
+	[EmployeeName] [varchar](255) NULL,
+	[Email] [varchar](255) NULL,
+	[Address] [text] NOT NULL,
+	[Phone] [varchar](255) NOT NULL,
+	[Gender] [varchar](255) NOT NULL,
+	[Birthday] [date] NOT NULL,
+	[Password] [varchar](255) NOT NULL,
+	[Department] [varchar](255) NOT NULL,
+	[Superiors] [varchar](255) NOT NULL,
+	[Role_id] [int] NOT NULL,
+	[IsAdmin] [bit] NULL,
+	[Budget] [int] NULL,
+	[Created_at] [datetime] NULL,
+	[Updated_at] [datetime] NULL,
+ CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Notification]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Notification](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SenderId] [varchar](255) NOT NULL,
+	[ReceiveId] [varchar](255) NOT NULL,
+	[Message] [varchar](255) NOT NULL,
+	[Status] [varchar](255) NOT NULL,
+	[Created_at] [datetime] NULL,
+ CONSTRAINT [PK_Notification] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Order]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order](
+	[OrderId] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeId] [varchar](255) NOT NULL,
+	[Status] [varchar](255) NOT NULL,
+	[Created_at] [datetime] NULL,
+	[Updated_at] [datetime] NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Order_item]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order_item](
+	[Order_item_id] [int] IDENTITY(1,1) NOT NULL,
+	[Order_id] [int] NOT NULL,
+	[Product_id] [int] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[Created_at] [datetime] NULL,
+	[Updated_at] [datetime] NULL,
+ CONSTRAINT [PK_Order_item] PRIMARY KEY CLUSTERED 
+(
+	[Order_item_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[ProductId] [int] IDENTITY(1,1) NOT NULL,
+	[ProductName] [varchar](255) NOT NULL,
+	[Quantity] [int] NULL,
+	[Price] [int] NOT NULL,
+	[feature_img_path] [varchar](255) NULL,
+	[Category_id] [int] NULL,
+	[Product_Enable] [bit] NULL,
+	[Role_id] [int] NOT NULL,
+	[created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+	[deleted_at] [datetime] NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RefreshToken]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RefreshToken](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeId] [varchar](255) NOT NULL,
+	[Token] [varchar](255) NOT NULL,
+	[JwtId] [varchar](255) NOT NULL,
+	[IsUsed] [bit] NOT NULL,
+	[IsRevorked] [bit] NOT NULL,
+	[AddedDate] [datetime] NULL,
+	[ExpiryDate] [datetime] NULL,
+ CONSTRAINT [PK_RefreshToken] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 7/31/2022 10:08:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[RoleId] [int] IDENTITY(1,1) NOT NULL,
+	[RoleName] [varchar](255) NOT NULL,
+	[Budget] [int] NULL,
+	[Created_at] [datetime] NULL,
+	[updated_at] [datetime] NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220726113232_stationery', N'5.0.17')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220727081724_stationery1', N'5.0.17')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220727085759_stationey1', N'5.0.17')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220730144646_stationery2', N'5.0.17')
+GO
+SET IDENTITY_INSERT [dbo].[Category] ON 
+
+INSERT [dbo].[Category] ([CategotyId], [CategotyName], [Id_parent], [Created_at], [Updated_at], [Deleted_at]) VALUES (1, N'Pen', 0, NULL, NULL, NULL)
+INSERT [dbo].[Category] ([CategotyId], [CategotyName], [Id_parent], [Created_at], [Updated_at], [Deleted_at]) VALUES (4, N'Book', 0, NULL, NULL, NULL)
+INSERT [dbo].[Category] ([CategotyId], [CategotyName], [Id_parent], [Created_at], [Updated_at], [Deleted_at]) VALUES (15, N'Computer Screen', 0, CAST(N'2022-07-31T09:34:37.037' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[Category] OFF
+GO
+INSERT [dbo].[Employee] ([EmployeeId], [EmployeeName], [Email], [Address], [Phone], [Gender], [Birthday], [Password], [Department], [Superiors], [Role_id], [IsAdmin], [Budget], [Created_at], [Updated_at]) VALUES (N'STK10001', N'Do Huy Hoang', N'hd6112002@gmail.com', N'121 Le Loi, P9, Q10, TP.HCM', N'0199782356', N'Male', CAST(N'2002-11-06' AS Date), N'25-D5-5A-D2-83-AA-40-0A-F4-64-C7-6D-71-3C-07-AD', N'Tecnology', N'0', 1, 1, 20000, NULL, CAST(N'2022-07-30T06:48:43.183' AS DateTime))
+INSERT [dbo].[Employee] ([EmployeeId], [EmployeeName], [Email], [Address], [Phone], [Gender], [Birthday], [Password], [Department], [Superiors], [Role_id], [IsAdmin], [Budget], [Created_at], [Updated_at]) VALUES (N'STK10002', N'Le Huu Thang', N'hf611@gmail.com', N'234/23 CMT 8, P10, Q3,TP.HCM', N'08242134214', N'Male', CAST(N'1990-01-09' AS Date), N'25-D5-5A-D2-83-AA-40-0A-F4-64-C7-6D-71-3C-07-AD', N'Technology', N'0', 2, 1, 200000000, CAST(N'2022-07-31T11:08:01.577' AS DateTime), NULL)
+INSERT [dbo].[Employee] ([EmployeeId], [EmployeeName], [Email], [Address], [Phone], [Gender], [Birthday], [Password], [Department], [Superiors], [Role_id], [IsAdmin], [Budget], [Created_at], [Updated_at]) VALUES (N'STK10003', N'Ly Kien Hong', N'hf611@gmail.com', N'121 Le Loi, P9, Q10, TP.HCM', N'0231234211', N'Male', CAST(N'2000-01-01' AS Date), N'25-D5-5A-D2-83-AA-40-0A-F4-64-C7-6D-71-3C-07-AD', N'Technology', N'STK10002', 5, 1, 10000000, CAST(N'2022-07-31T11:08:50.917' AS DateTime), NULL)
+INSERT [dbo].[Employee] ([EmployeeId], [EmployeeName], [Email], [Address], [Phone], [Gender], [Birthday], [Password], [Department], [Superiors], [Role_id], [IsAdmin], [Budget], [Created_at], [Updated_at]) VALUES (N'STK10004', N'Nguyen Van Khanh Phat', N'ak54@gmail.com', N'240/28 Ung Van Kiem, P10, Q.Binh Thanh,TP.HCM', N'0123234134', N'Male', CAST(N'1999-02-11' AS Date), N'25-D5-5A-D2-83-AA-40-0A-F4-64-C7-6D-71-3C-07-AD', N'Technology', N'STK10003', 11, 0, 2000000, CAST(N'2022-07-31T11:12:04.717' AS DateTime), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Notification] ON 
+
+INSERT [dbo].[Notification] ([Id], [SenderId], [ReceiveId], [Message], [Status], [Created_at]) VALUES (2, N'STK10001', N'STK100012', N'Superior Do Huy Hoang has just approved new order at 7/31/2022 4:57:34 AM', N'Unseen', CAST(N'2022-07-31T04:57:34.187' AS DateTime))
+INSERT [dbo].[Notification] ([Id], [SenderId], [ReceiveId], [Message], [Status], [Created_at]) VALUES (4, N'STK10001', N'STK100012', N'Employee Do Huy Hoang has just ordered at 7/31/2022 7:22:14 AM', N'Unseen', CAST(N'2022-07-31T07:22:14.253' AS DateTime))
+INSERT [dbo].[Notification] ([Id], [SenderId], [ReceiveId], [Message], [Status], [Created_at]) VALUES (5, N'STK10001', N'STK100012', N'Employee Do Huy Hoang has just ordered at 7/31/2022 10:17:31 AM', N'Unseen', CAST(N'2022-07-31T10:17:31.797' AS DateTime))
+SET IDENTITY_INSERT [dbo].[Notification] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Order] ON 
+
+INSERT [dbo].[Order] ([OrderId], [EmployeeId], [Status], [Created_at], [Updated_at]) VALUES (34, N'STK10001', N'Waiting for approval', CAST(N'2022-07-31T07:22:14.253' AS DateTime), NULL)
+INSERT [dbo].[Order] ([OrderId], [EmployeeId], [Status], [Created_at], [Updated_at]) VALUES (35, N'STK10001', N'Waiting for approval', CAST(N'2022-07-31T10:17:31.797' AS DateTime), NULL)
+SET IDENTITY_INSERT [dbo].[Order] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Order_item] ON 
+
+INSERT [dbo].[Order_item] ([Order_item_id], [Order_id], [Product_id], [Quantity], [Created_at], [Updated_at]) VALUES (50, 34, 4, 1, NULL, NULL)
+INSERT [dbo].[Order_item] ([Order_item_id], [Order_id], [Product_id], [Quantity], [Created_at], [Updated_at]) VALUES (51, 34, 5, 1, NULL, NULL)
+INSERT [dbo].[Order_item] ([Order_item_id], [Order_id], [Product_id], [Quantity], [Created_at], [Updated_at]) VALUES (52, 35, 1, 1, NULL, NULL)
+SET IDENTITY_INSERT [dbo].[Order_item] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Product] ON 
+
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (1, N'Pencil', 30, 3000, N'Images/products/1/butchi.jpg', 1, 1, 11, NULL, CAST(N'2022-07-31T11:24:01.813' AS DateTime), NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (2, N'Ballpoint pens', 20, 4998, N'Images/products/2/butbi.jpg', 1, 1, 2, NULL, CAST(N'2022-07-29T10:37:03.130' AS DateTime), NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (4, N'Red Markers', 10, 9000, N'Images/products/4/butlongdo.jpg', 1, 1, 2, CAST(N'2022-07-28T13:03:31.130' AS DateTime), NULL, NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (5, N'Bule Markers', 10, 9000, N'Images/products/5/butlongxanh.jpg', 1, 1, 2, CAST(N'2022-07-28T13:06:20.177' AS DateTime), NULL, NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (7, N'Notebook', 20, 10000, N'Images/products/7/vo.jpeg', 4, 1, 5, NULL, CAST(N'2022-07-31T11:24:16.867' AS DateTime), NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (8, N'70gsm Double A A4 Paper', 10, 30000, N'Images/products/8/giaya4.jpg', 4, 1, 5, NULL, CAST(N'2022-07-31T11:24:44.267' AS DateTime), NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (9, N'500 leaf name card book', 10, 30000, N'Images/products/9/soname.jpg', 4, 1, 2, NULL, CAST(N'2022-07-31T11:25:06.553' AS DateTime), NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (10, N'Note color 3x5', 20, 4000, N'Images/products/10/note.jpg', 4, 1, 11, CAST(N'2022-07-31T14:34:49.617' AS DateTime), NULL, NULL)
+INSERT [dbo].[Product] ([ProductId], [ProductName], [Quantity], [Price], [feature_img_path], [Category_id], [Product_Enable], [Role_id], [created_at], [updated_at], [deleted_at]) VALUES (11, N'23.5 inch Samsung monitor LS24F350FHEXXV', 10, 25000000, N'Images/products/11/manhinh.jpg', 15, 1, 2, CAST(N'2022-07-31T14:39:00.077' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[Product] OFF
+GO
+SET IDENTITY_INSERT [dbo].[RefreshToken] ON 
+
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (45, N'STK10001', N'OYNY3ALH4Q9SK82WI1S17PCEBKROZVDF16577d51028-6828-4497-a7a3-17f9ff50e35c', N'cd466c22-0144-4229-943f-d6a3ba70035f', 0, 0, CAST(N'2022-07-27T12:40:44.030' AS DateTime), CAST(N'2022-07-27T13:40:44.030' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (46, N'STK10001', N'91QG6KKS7PZHC4NJ9AE8OKKLQA5UQLOGZUO5bfb82d5-6172-443e-b841-2e70d4e7db8f', N'5e811685-0022-48cd-85ad-ad8e77c9ed5e', 0, 0, CAST(N'2022-07-27T13:20:30.823' AS DateTime), CAST(N'2022-07-27T14:20:30.823' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (47, N'STK10001', N'SHR7FYG5KE3E390AFCD7B8KS9O0VN9Z7XMT2738aa30-8022-4a1e-8d36-58321abf30aa', N'9cd32bf8-57f7-4472-ad8c-159d40747fb7', 0, 1, CAST(N'2022-07-27T13:20:37.027' AS DateTime), CAST(N'2022-07-27T14:20:37.027' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (48, N'STK10001', N'4SAXLK101IKNCI5I6WUMB6OOAXINITKRQIR3dda76f7-5779-405f-bc97-ba4372df9709', N'20ac3cc5-bf00-472e-aebb-d3f5bf2a1268', 0, 0, CAST(N'2022-07-28T10:50:42.147' AS DateTime), CAST(N'2022-07-28T11:50:42.147' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (49, N'STK10001', N'JKMIKLR026ZER81R1YT6VWU4PWDE9487TOS35ee8222-b5d1-47c8-a8ff-12ee5e7e7c90', N'73da5907-2129-4a80-8199-7868e185b677', 0, 1, CAST(N'2022-07-28T11:28:12.143' AS DateTime), CAST(N'2022-07-28T12:28:12.143' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (50, N'STK10001', N'2SQ2AB6ARRZ7NICFD58U7YZ69C4QN8EN3UH5f713740-a5ec-4324-91a9-704479160f5e', N'e307d762-8ed9-4eba-b91f-199a7cce7d0f', 0, 0, CAST(N'2022-07-28T13:31:04.173' AS DateTime), CAST(N'2022-07-28T14:31:04.173' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (51, N'STK10001', N'UZLG1FE4JWAL34YYS6DU2D84SVOCUSGGV6O21df07c3-41b2-4e8e-acc6-419837d73bb6', N'8f32fa1d-6970-48a7-9202-49e173746e6b', 1, 0, CAST(N'2022-07-28T13:41:17.627' AS DateTime), CAST(N'2022-07-28T13:43:17.627' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (52, N'STK10001', N'T05Z64L2N6LF8VPSZE4CRQWK5G1N050T4302b3c6bd2-8736-4fb5-b974-7872578f07a9', N'6d6a1ba3-f85c-40aa-a198-5cd630726d70', 1, 0, CAST(N'2022-07-28T13:42:50.833' AS DateTime), CAST(N'2022-07-28T13:44:50.833' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (53, N'STK10001', N'RX2EQRXDLMYL564JSDWE44U0UEPCGEO9M2B2d304873-7d0a-4bd4-9d56-80a570447728', N'99c1532e-3613-4c5f-a025-f25ba7d9efda', 0, 0, CAST(N'2022-07-28T13:42:50.833' AS DateTime), CAST(N'2022-07-28T13:44:50.833' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (54, N'STK10001', N'GUQKTLBVT7EOKGSKIZMS0ATDNRGH8IPNNGJac484b65-5430-4cbc-af54-d881b4f92cb4', N'fdedaa2c-fddb-4a03-9f8e-2fb01f0a0b71', 0, 0, CAST(N'2022-07-28T13:44:06.550' AS DateTime), CAST(N'2022-07-28T15:44:06.550' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (55, N'STK10001', N'SKYBWVBMZ54BN5XHTGYOHKW0TTIIZAP2K299ff223ce-667c-4357-87be-f22fe13afad9', N'a62b80e9-5c9b-40cd-b3c6-3f8601210876', 0, 0, CAST(N'2022-07-28T13:44:06.550' AS DateTime), CAST(N'2022-07-28T15:44:06.550' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (56, N'STK10001', N'HHBYUIM0QPZZQDE9XH1YSZMEICH7X1YMO0F8a1d8b36-84aa-46c0-9aa7-ffe259fc45d6', N'754d44af-2b27-4d9f-bd41-12e8fce35038', 0, 0, CAST(N'2022-07-28T13:44:06.550' AS DateTime), CAST(N'2022-07-28T15:44:06.550' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (57, N'STK10001', N'RRBUKR69FWKOSMU3YU28W9GWIWCUKHI9G9Cbf60e39a-105a-4780-8a16-8abda09ecff9', N'fe6652c8-257b-4ace-a985-88db43e3ebae', 0, 0, CAST(N'2022-07-28T13:44:06.550' AS DateTime), CAST(N'2022-07-28T15:44:06.550' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (58, N'STK10001', N'RD2OMZUA6TEXHBVIWNCJVZEHN8ZNP7MQC1B096537ce-69b3-4762-b600-52ebb38d27c6', N'81685253-d72c-4882-8137-253c11033fd7', 0, 0, CAST(N'2022-07-28T13:44:06.550' AS DateTime), CAST(N'2022-07-28T15:44:06.550' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (59, N'STK10001', N'IWAEB0BLO5GRO6WCM0FOZ373LXNJW0EO1CPdb7d45da-db8b-413f-b156-8505e486f615', N'26dbd6f2-c6b8-4fa7-b930-fdb078673675', 0, 0, CAST(N'2022-07-28T13:44:06.550' AS DateTime), CAST(N'2022-07-28T15:44:06.550' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (60, N'STK10001', N'8GXCBR96214CADWXOP0G0F8OMLFMAZFLN2Da0da5a8f-d6c2-4f30-be31-7ad189bcaf88', N'85a8e7f0-ec2a-4cd3-96b6-b55d69cdc746', 0, 1, CAST(N'2022-07-28T13:44:11.343' AS DateTime), CAST(N'2022-07-28T15:44:11.343' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (61, N'STK10001', N'C5ZJ3KV5GT5PED0MEX0M5APEWSG906Z6JNQb5b5cdfb-6a3b-4308-b017-ff5001a284fc', N'53e3cbca-b3b6-4a0f-8bf8-524593fc294d', 1, 0, CAST(N'2022-07-29T02:12:00.027' AS DateTime), CAST(N'2022-07-29T04:12:00.027' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (62, N'STK10001', N'19YGXUCXJ5S028N2AC1BCOEMI7QB0P5L9H6ad15b32c-8676-4a81-b284-9f573d8f26ef', N'3ba93166-2bbc-4cc3-8cba-4343ad4f5c66', 0, 0, CAST(N'2022-07-29T03:44:40.690' AS DateTime), CAST(N'2022-07-29T05:44:40.690' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (63, N'STK10001', N'1CAHPG8R92AV341DN9YM3XMPFQDIASAY3916bcaa213-ff06-4df4-95f1-ce6796170788', N'61590249-c448-45ea-bc73-6f0533a48c0c', 0, 0, CAST(N'2022-07-29T03:44:40.690' AS DateTime), CAST(N'2022-07-29T05:44:40.690' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (64, N'STK10001', N'1NTVEGT6G9WOSD3BACWWNMZJ8NR9KNBBD6D68e20ee5-0080-4c35-823d-b340b53738f4', N'79861de4-0439-4f1b-a6e3-4de2b02caa2b', 1, 0, CAST(N'2022-07-29T03:54:49.907' AS DateTime), CAST(N'2022-07-29T05:54:49.907' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (65, N'STK10001', N'72IE8IR3UJTX1XLZLZXVSYDZUC70YXF2LVT86e895aa-df54-46a1-9321-0fc6255a6c04', N'13fb7aa0-3a59-41e1-a055-3aa02cb7d5ae', 0, 0, CAST(N'2022-07-29T04:59:23.807' AS DateTime), CAST(N'2022-07-29T06:59:23.807' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (66, N'STK10001', N'USXKNQ1E4VQCLLZ0W9YOQURGOWAW9315S5Vc044d512-5f60-4bc9-a4c1-eec154e8f08b', N'2082f7bd-51c0-40dc-af0d-644dc4d527cf', 0, 1, CAST(N'2022-07-29T04:59:23.807' AS DateTime), CAST(N'2022-07-29T06:59:23.807' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (67, N'STK10001', N'ZDI4OAQLBB8UH9CIWVE0US0ANARN1ZFL0VC615de26d-7518-49bd-9d0d-b3fcb32217e4', N'0cb0e876-01dc-4061-a8f0-0b864e9b1e45', 1, 0, CAST(N'2022-07-29T07:28:44.110' AS DateTime), CAST(N'2022-07-29T09:28:44.110' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (68, N'STK10001', N'YBAJL2T3QA92T66P91UCS1VMFU428UCP6KN2cc53ae3-c0aa-47e7-b91b-97ecdccad266', N'42959dd6-b713-469e-9ffa-2b6e139cb9fe', 0, 0, CAST(N'2022-07-29T08:34:33.487' AS DateTime), CAST(N'2022-07-29T10:34:33.487' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (69, N'STK10001', N'ZWF9J3A5N59LS81NV3RQDNOW91OQ23LRHRF128ea257-48de-4d78-a3f3-1b88a682d97f', N'74a84980-8298-4be8-aa91-0705de5ac7ee', 0, 0, CAST(N'2022-07-29T08:34:33.487' AS DateTime), CAST(N'2022-07-29T10:34:33.487' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (70, N'STK10001', N'HINENK04J4ZK5RIE4K60M0MN7QWVWLMMK5Fb2b620c5-a246-47c9-8727-47eeb854fb3a', N'a8a6e150-a9a5-4058-ab04-38d4caa9eeaf', 0, 0, CAST(N'2022-07-29T08:34:33.487' AS DateTime), CAST(N'2022-07-29T10:34:33.487' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (71, N'STK10001', N'PTUWVWU63GC65ADEZFJPO97UPD8QFHGDCFS69d072a0-f8b1-476d-9e6c-21f3d16614b3', N'e45409d1-1a26-404a-aa19-b768f8b063b4', 1, 0, CAST(N'2022-07-29T08:35:38.040' AS DateTime), CAST(N'2022-07-29T10:35:38.040' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (72, N'STK10001', N'XDKS1ORHBCW8LVIMADO2DDA62YF7SEQ0YI49fd10f24-2fcb-41f9-adf2-c3860653632c', N'fd6d8f3f-b7e9-42eb-8f50-685b731de97f', 0, 0, CAST(N'2022-07-29T09:44:28.270' AS DateTime), CAST(N'2022-07-29T11:44:28.270' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (73, N'STK10001', N'38FE1Z0L804SMNBBF84AXC20PTEP81GSW98ab239c63-72b0-4c78-b14f-847c98bdded9', N'e13185a6-8ca2-40c4-b260-f770494a55a8', 0, 0, CAST(N'2022-07-29T09:44:28.273' AS DateTime), CAST(N'2022-07-29T11:44:28.273' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (74, N'STK10001', N'A3KETH121KVNW7BPC2EU4HTW3TVE85OG7VJ94cdbcc2-32d4-4baf-9d03-a140f3f76575', N'1bc17dee-15da-4901-8081-9982d6a134e8', 0, 0, CAST(N'2022-07-29T09:44:28.270' AS DateTime), CAST(N'2022-07-29T11:44:28.270' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (75, N'STK10001', N'YAJLLK92FF4YOQG8XH8TW6IWXJRN1AZX1PH4925534f-450e-4042-876d-6c08670a054f', N'a3af8ebd-b16c-4eb9-8de6-8a66d99ce177', 0, 0, CAST(N'2022-07-29T09:44:28.310' AS DateTime), CAST(N'2022-07-29T11:44:28.310' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (76, N'STK10001', N'H27W60LE19BVNT5WOA59YN9KFAJV6PII8F4d6c821f5-6f81-4ee5-9d24-55eb41f8da11', N'87d143eb-bcae-49fe-884a-cc4afab46cd2', 1, 0, CAST(N'2022-07-29T09:44:32.763' AS DateTime), CAST(N'2022-07-29T11:44:32.763' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (77, N'STK10001', N'YMKQFNL5H55JNOJPHVFDE5YZDJKHK68YLN4625f9037-79ae-4542-accf-d0b0a86176a9', N'6111c0c9-04c8-482c-984f-46d12fc083e6', 1, 0, CAST(N'2022-07-29T10:45:04.343' AS DateTime), CAST(N'2022-07-29T12:45:04.343' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (78, N'STK10001', N'RQ16H41K1JP8OYXZ5XCDJXIM1CFO2MJMBRN319c9034-faf4-4c39-baed-145e92bae75d', N'afc746ed-fcfa-4d28-9918-07c8830bd98a', 0, 0, CAST(N'2022-07-29T10:45:04.347' AS DateTime), CAST(N'2022-07-29T12:45:04.347' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (79, N'STK10001', N'TTT5PDB8XK6M3G6YQQMTJOPF1MSW3R276X7021441d9-ea25-4fe4-b657-16a392919b89', N'a3a6297b-30ad-4e6b-91c9-026028c2a634', 0, 0, CAST(N'2022-07-29T12:38:10.793' AS DateTime), CAST(N'2022-07-29T14:38:10.793' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (80, N'STK10001', N'WA84SICDOY4NSZRYBFNPZYKGDO1DUNMGRAU6e3c768d-d710-44f5-860e-112d066b5749', N'05789ba7-5184-4375-8bbd-775be6a62425', 0, 0, CAST(N'2022-07-29T12:38:10.793' AS DateTime), CAST(N'2022-07-29T14:38:10.793' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (81, N'STK10001', N'UX0G7KHYR07ZAE7Q42BLJGFPHJ7YRAQMUGY885e9c6a-3506-4bbe-9e42-0c888ff300ab', N'e3127dfa-97dd-4e59-abff-c9178a5d480a', 1, 0, CAST(N'2022-07-29T13:12:06.220' AS DateTime), CAST(N'2022-07-29T15:12:06.220' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (82, N'STK10001', N'LLANACCASSDPRAKCPKGIDWFO0NRLYD8C9JVbebe9173-ae1a-49f3-b3da-ff4f1b8ad293', N'6fe0be32-ee4c-4a0e-b314-8758b0e50c54', 0, 0, CAST(N'2022-07-29T14:26:28.033' AS DateTime), CAST(N'2022-07-29T16:26:28.033' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (83, N'STK10001', N'9ELN8HY6RPQIFMY2A4Q7FLE63WHG5ALM1C13182f65e-7e17-4477-bbaf-d7dd4136e1b3', N'89641ea3-68b1-4d0c-a143-ffc5bf898797', 1, 0, CAST(N'2022-07-29T14:26:28.033' AS DateTime), CAST(N'2022-07-29T16:26:28.033' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (84, N'STK10001', N'RSORYWF1FYXB8VPWG8Q06BY9H8ZUNANOX6D464d4dbe-3d3c-4faf-9fc3-57dfb4932029', N'b6df5ac8-d38d-4a69-beeb-ff329c774f31', 0, 1, CAST(N'2022-07-29T15:31:01.207' AS DateTime), CAST(N'2022-07-29T17:31:01.207' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (85, N'STK10001', N'S3JBKFNXY74870CSV5069QSK4V0YOVB81DXa0aaf3a5-a191-4f1b-b793-82f732b97aa7', N'eb34ce4e-6332-447c-9b86-04a5686bcb24', 0, 0, CAST(N'2022-07-29T15:31:01.207' AS DateTime), CAST(N'2022-07-29T17:31:01.207' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (86, N'STK10001', N'PLXTADHGVLPBH3VXZQV70TLROLY1QAHZAQK89792198-8ffb-4540-8071-3bb6408ea886', N'8078602a-1d7a-48be-a74b-32f43ec08df3', 0, 0, CAST(N'2022-07-29T18:31:11.070' AS DateTime), CAST(N'2022-07-29T20:31:11.070' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (87, N'STK10001', N'T5V0PS7APRAK88XBYUYCHBAULRIJIKH1NE99a88bae7-9f8e-4359-bd28-d6349a954051', N'd213528a-f779-4883-a6f0-4f28634d9020', 1, 0, CAST(N'2022-07-29T18:32:03.397' AS DateTime), CAST(N'2022-07-29T18:34:03.397' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (88, N'STK10001', N'14PQWRY2BS1QKD7LHSWDWSGZE6B0W4I0CHM74b21cf4-b5dc-4fdf-8675-6efb412b36e8', N'2316af21-0847-457c-8a13-3836e1dd6d89', 0, 0, CAST(N'2022-07-29T18:33:33.697' AS DateTime), CAST(N'2022-07-29T18:35:33.697' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (89, N'STK10001', N'GOZ2U1GHAETGQE7QJEVUFCSCCVRDF35WARSace1a757-9074-4d25-a420-16a566ce9318', N'b1ef4bb3-76fd-446d-91fe-9684188cd5d4', 0, 1, CAST(N'2022-07-29T18:33:33.697' AS DateTime), CAST(N'2022-07-29T18:35:33.697' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (90, N'STK10001', N'O5CENFG2BLNYTLYLWUEDNJ8HOR7N2F4QYMXe7ee2790-b118-4db0-a3d7-9efdd224173f', N'df42ecfb-0774-4c22-8045-13191b7b6034', 1, 0, CAST(N'2022-07-30T02:38:55.143' AS DateTime), CAST(N'2022-07-30T04:38:55.143' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (91, N'STK10001', N'DPM35NG4VQFX6E1XS3A9T4YANHGG2V48XZC7e526b8b-e39d-4420-a7a6-e69d13970bfe', N'38af5766-18b2-4965-bc88-d9f6a5aacbac', 1, 0, CAST(N'2022-07-30T03:47:10.440' AS DateTime), CAST(N'2022-07-30T05:47:10.440' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (92, N'STK10001', N'XY2LQ04BRCQQWGH3DJE7JHK304AYYU80PCA2697ea16-b13b-4341-88d4-4b92ed8bd7d2', N'3f8afa1c-06d2-4ddc-a2ef-c18d897ab463', 0, 0, CAST(N'2022-07-30T03:47:10.440' AS DateTime), CAST(N'2022-07-30T05:47:10.440' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (93, N'STK10001', N'RG2O5JJ9HKIX8HABMSO5OHD7EKEX5G3FM4M763d44c9-df91-4323-860c-89c7660ffc7b', N'3c28e5c3-afa3-43d6-99a9-8cdd5fac13d4', 0, 0, CAST(N'2022-07-30T04:48:31.823' AS DateTime), CAST(N'2022-07-30T06:48:31.823' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (94, N'STK10001', N'U5FI7ROHRB5WFW7NVCJVDHIMXVGDL3N60PTe1925edc-efc9-4d39-923f-f3a1e047a801', N'567b46b0-383d-4f69-8fa0-2f71d632e4f3', 1, 0, CAST(N'2022-07-30T04:48:31.823' AS DateTime), CAST(N'2022-07-30T06:48:31.823' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (95, N'STK10001', N'XVF9IBAREI09B0H5KNPFR1IVBLMZPEHBLM5365ffa55-9b70-4f44-8627-6284647ea311', N'85df57e9-6f0f-4d69-81fe-5bb80601f550', 1, 0, CAST(N'2022-07-30T06:26:49.833' AS DateTime), CAST(N'2022-07-30T08:26:49.833' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (96, N'STK10001', N'A1JVYK19PND0GR0A26AJNVC7J4AV4O1PCXYd789ec93-1ec4-4c22-9fe6-9d0872dc680b', N'79e04b33-97e1-44f1-b9ba-dd1c348bae57', 0, 0, CAST(N'2022-07-30T06:26:49.833' AS DateTime), CAST(N'2022-07-30T08:26:49.833' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (97, N'STK10001', N'4GSV793JQLIIF4VWSSTO53KW9G37KTL1MNT49d9f55d-385f-4a7d-a8c3-5efdf4612f80', N'967e047b-0c1d-49ef-a297-72b316b10885', 1, 0, CAST(N'2022-07-30T08:12:30.070' AS DateTime), CAST(N'2022-07-30T10:12:30.070' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (98, N'STK10001', N'JUALI25T3MGLRA6OAEBHP8IAIIJN77EMTN2241f2715-97e6-474f-91a4-c5e80e4ba14e', N'1f83af55-b89e-41f9-8e2e-9405ebaa43f2', 0, 0, CAST(N'2022-07-30T08:12:30.070' AS DateTime), CAST(N'2022-07-30T10:12:30.070' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (99, N'STK10001', N'0HPA4BJ1MSDXKWT107FVXLP9HKZFZZB6THRc36a2f38-2b71-4f25-b4ac-8140436b1c26', N'fc0e2ac0-3e67-40cf-aa8c-b5a03918e4b3', 0, 0, CAST(N'2022-07-30T09:16:05.430' AS DateTime), CAST(N'2022-07-30T11:16:05.430' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (100, N'STK10001', N'Y2XSXKDIH2XZZTEBBJUSP6CSKTFJUJK5GC010297ed2-bdb9-42a1-ab9a-1100dbfc6572', N'4c944f2b-1058-4ac5-98b2-a1e6fc181399', 1, 0, CAST(N'2022-07-30T09:16:05.430' AS DateTime), CAST(N'2022-07-30T11:16:05.430' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (101, N'STK10001', N'KLNI6FG7GSQNQ4MBDWPFPHMRCYGB68AOH5Ae901e641-fd39-444d-86b3-88d6d804a1a6', N'61b3e2c4-2bdb-492a-9162-a348a8a5d220', 1, 0, CAST(N'2022-07-30T10:18:46.440' AS DateTime), CAST(N'2022-07-30T12:18:46.440' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (102, N'STK10001', N'56ORBY7VDEEBUNWI53LMF2LG5QAPGPGMNLE8b80a0ee-2177-4bee-ad48-0ebf10485593', N'eeeb0da3-dcff-4fae-99ca-eb289d1d8be2', 0, 0, CAST(N'2022-07-30T11:19:47.853' AS DateTime), CAST(N'2022-07-30T13:19:47.853' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (103, N'STK10001', N'YA8DLO8NEQVZQBSLED4A0FU7BWIM7Z9EVBF6fe134e9-7296-4e24-8422-7645e7615533', N'3af38de8-59e3-4e5a-a42b-814921cf9905', 0, 0, CAST(N'2022-07-30T11:19:47.853' AS DateTime), CAST(N'2022-07-30T13:19:47.853' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (110, N'STK10001', N'CVNSZ1QE06VTAMARREES2VJK3Z3SCHEASVD6a946a3e-ae7c-4a2b-bda3-d6335853745d', N'fbf9ef81-6c9d-4444-a591-3a46d38cee10', 0, 0, CAST(N'2022-07-30T13:22:13.810' AS DateTime), CAST(N'2022-07-30T15:22:13.810' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (112, N'STK10001', N'THB568ZL8GWTJBGVJD0YDNK5GYL6V1ULI0P6d90f85a-f424-4fb7-8cf2-04c83a12ba73', N'0c02a9a8-a146-4443-b316-bf97d74a33c8', 0, 0, CAST(N'2022-07-30T13:44:52.510' AS DateTime), CAST(N'2022-07-30T15:44:52.510' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (114, N'STK10001', N'BWBI1NNISSX1YMHUVU9MDZ31LMFBUR8YF6C3a0a6e11-d9fb-4dde-be54-4b4d15ea02c1', N'611630ec-e7ad-429c-b88d-91c489858b1d', 0, 0, CAST(N'2022-07-30T14:15:29.627' AS DateTime), CAST(N'2022-07-30T16:15:29.627' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (117, N'STK10001', N'Y6RM7CS149YVQ1WSQ67XB6W05O7Y15RMIXD78369402-5128-4e04-af4a-b1a229c812af', N'defa915c-7704-4bd8-b4fa-e83b613ab216', 0, 0, CAST(N'2022-07-30T14:28:34.027' AS DateTime), CAST(N'2022-07-30T16:28:34.027' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (119, N'STK10001', N'OD76EIA7ZJT7CPBMPPVPS1MQQTMAE3SWEP9fd9afe94-6ba8-4106-a89d-142dd60d4bdc', N'38e54ba5-a65f-494d-ad43-5f041b710620', 0, 0, CAST(N'2022-07-30T14:30:57.717' AS DateTime), CAST(N'2022-07-30T16:30:57.717' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (122, N'STK10001', N'6CMOVSNSR5GLU7VN7GD9GT2F3YVMACADYBWb472edef-2191-4c5a-ac4b-740bc930bc48', N'25cbaf62-26d6-4275-9f03-7a67bcb81fec', 0, 0, CAST(N'2022-07-30T15:04:56.547' AS DateTime), CAST(N'2022-07-30T17:04:56.547' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (124, N'STK10001', N'G9IXD9ASC946Y04O5B9OZ7F269QE9PMV1VD3d38b947-3cdc-4460-9efd-d43c46bac7a7', N'90651814-5fcd-4b0a-9ffc-1b06063e1a52', 1, 0, CAST(N'2022-07-31T04:20:43.323' AS DateTime), CAST(N'2022-07-31T06:20:43.323' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (125, N'STK10001', N'OKQ38ZTJGX2R5TMPW4X4F6YSYM4LS5EHF3I32665aea-98e4-4e6c-9681-0df47b3220b6', N'eb9f7747-a4df-4763-b519-1cfceb5efc21', 0, 0, CAST(N'2022-07-31T05:25:59.667' AS DateTime), CAST(N'2022-07-31T07:25:59.667' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (126, N'STK10001', N'YIKOQ5U8N5043149EOF9S7RTIB8R66IMPXK31519cce-99c9-4781-a813-dbc28d40df9c', N'4dab2b39-c36a-4f79-8553-bd7134d4bbef', 1, 0, CAST(N'2022-07-31T05:25:59.667' AS DateTime), CAST(N'2022-07-31T07:25:59.667' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (127, N'STK10001', N'34S3UO4O88MGU47ROLB5I4NJQQFCMS2NS8Qddca2537-a239-4fdf-a98d-e7b84c8eb862', N'bef7e349-b890-43e6-a848-b21f641d69f1', 0, 1, CAST(N'2022-07-31T06:26:00.287' AS DateTime), CAST(N'2022-07-31T08:26:00.287' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (128, N'STK10001', N'3O2FM2JJ39SVT010AMGVIP89NYY5SIFU0BCafb49ac5-9ab5-49b0-bb8a-f454be3ab263', N'8ab1d647-f321-43a9-9f00-29d93e8e5745', 0, 0, CAST(N'2022-07-31T09:31:35.000' AS DateTime), CAST(N'2022-07-31T11:31:35.000' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (129, N'STK10001', N'Z54X3RW0IZAAHJ0OLG7MIFX9Q1NBR7RGUS7b20feb87-8a1c-47f8-a9e6-ed3f2aeabcc8', N'cb61eb1e-8383-4faf-a2b4-bd5cdece2fc0', 0, 0, CAST(N'2022-07-31T09:32:58.213' AS DateTime), CAST(N'2022-07-31T11:32:58.213' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (131, N'STK10001', N'S6F2SE12TAIH2OT2DFFIABII1Q6Y1PUITZ1640711c5-d1ec-4c8c-87a4-4b6c0514e037', N'ab67d4f9-44a3-430d-b61e-cf19429edca7', 1, 0, CAST(N'2022-07-31T10:16:01.997' AS DateTime), CAST(N'2022-07-31T12:16:01.997' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (132, N'STK10001', N'SMNC9CYSZLNCEITDYS5Y95YDG8L54GMF6K906721590-4211-4460-8827-f1f9127145e9', N'1297238d-c9a1-4bbc-b368-9132ec0ad20d', 0, 1, CAST(N'2022-07-31T11:17:34.947' AS DateTime), CAST(N'2022-07-31T13:17:34.947' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (133, N'STK10001', N'OBKMYGNEWLKP1PGWWPNUBJYUESKWBDU58EO975a9097-97d0-4a6a-86b7-c301d02192f2', N'9794092b-bc7b-414c-8506-7861ec90c14f', 0, 0, CAST(N'2022-07-31T14:09:54.237' AS DateTime), CAST(N'2022-07-31T16:09:54.237' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (134, N'STK10002', N'O3ZXN39LRE3JDVDRDXE814FAN6QH2VO5P0K1f135c14-d790-45ea-a878-ced01570810c', N'fdea9623-2bf9-48e8-bd86-fa34f0de97f6', 0, 0, CAST(N'2022-07-31T14:32:50.167' AS DateTime), CAST(N'2022-07-31T16:32:50.167' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (135, N'STK10001', N'9V3O1N6WZUA1I24XT402PCI8LSMU1SSYV2N76d188aa-314a-45f2-9de9-4ae0e340a808', N'ba889aac-d893-4958-8313-08abbe3fb08e', 0, 0, CAST(N'2022-07-31T14:33:34.233' AS DateTime), CAST(N'2022-07-31T16:33:34.233' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (136, N'STK10003', N'ZTCEX40TQNBW20ACHCYUT51PLBSDRT9YUYC001940ab-6f5d-446e-a49a-c4ecd3375cae', N'8ad6efec-5fad-46e2-a999-66a571eddeea', 0, 0, CAST(N'2022-07-31T14:39:55.600' AS DateTime), CAST(N'2022-07-31T16:39:55.600' AS DateTime))
+INSERT [dbo].[RefreshToken] ([Id], [EmployeeId], [Token], [JwtId], [IsUsed], [IsRevorked], [AddedDate], [ExpiryDate]) VALUES (137, N'STK10002', N'AJILZTES4CEU93RD326LQQF3J2ND1A51S8L36edc385-2e14-4e04-8ffa-2f56c73089b2', N'e8f5bbec-8bab-4dce-8b48-b64a9487925b', 0, 0, CAST(N'2022-07-31T14:51:58.967' AS DateTime), CAST(N'2022-07-31T16:51:58.967' AS DateTime))
+SET IDENTITY_INSERT [dbo].[RefreshToken] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Role] ON 
+
+INSERT [dbo].[Role] ([RoleId], [RoleName], [Budget], [Created_at], [updated_at]) VALUES (1, N'Admin', 20000, NULL, CAST(N'2022-07-31T06:49:42.573' AS DateTime))
+INSERT [dbo].[Role] ([RoleId], [RoleName], [Budget], [Created_at], [updated_at]) VALUES (2, N'Director', 200000000, NULL, CAST(N'2022-07-31T06:49:54.633' AS DateTime))
+INSERT [dbo].[Role] ([RoleId], [RoleName], [Budget], [Created_at], [updated_at]) VALUES (5, N' Manager', 10000000, NULL, CAST(N'2022-07-31T06:50:10.350' AS DateTime))
+INSERT [dbo].[Role] ([RoleId], [RoleName], [Budget], [Created_at], [updated_at]) VALUES (11, N'Employee', 2000000, NULL, CAST(N'2022-07-31T06:50:19.313' AS DateTime))
+SET IDENTITY_INSERT [dbo].[Role] OFF
+GO
+ALTER TABLE [dbo].[Category] ADD  DEFAULT ((0)) FOR [Id_parent]
+GO
+ALTER TABLE [dbo].[Employee] ADD  DEFAULT ('') FOR [Superiors]
+GO
+ALTER TABLE [dbo].[Employee] ADD  DEFAULT ((0)) FOR [IsAdmin]
+GO
+ALTER TABLE [dbo].[Employee] ADD  DEFAULT ((0)) FOR [Budget]
+GO
+ALTER TABLE [dbo].[Product] ADD  DEFAULT ((0)) FOR [Quantity]
+GO
+ALTER TABLE [dbo].[Product] ADD  DEFAULT ((0)) FOR [Product_Enable]
+GO
+ALTER TABLE [dbo].[Role] ADD  DEFAULT ((0)) FOR [Budget]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [fk_Employee_Roles_Role_id] FOREIGN KEY([Role_id])
+REFERENCES [dbo].[Role] ([RoleId])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [fk_Employee_Roles_Role_id]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [fk_Orders_Employee_EmployeeId] FOREIGN KEY([EmployeeId])
+REFERENCES [dbo].[Employee] ([EmployeeId])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [fk_Orders_Employee_EmployeeId]
+GO
+ALTER TABLE [dbo].[Order_item]  WITH CHECK ADD  CONSTRAINT [fk_Orders_Order_items_Order_id] FOREIGN KEY([Order_id])
+REFERENCES [dbo].[Order] ([OrderId])
+GO
+ALTER TABLE [dbo].[Order_item] CHECK CONSTRAINT [fk_Orders_Order_items_Order_id]
+GO
+ALTER TABLE [dbo].[Order_item]  WITH CHECK ADD  CONSTRAINT [fk_Products_Order_items_Product_id] FOREIGN KEY([Product_id])
+REFERENCES [dbo].[Product] ([ProductId])
+GO
+ALTER TABLE [dbo].[Order_item] CHECK CONSTRAINT [fk_Products_Order_items_Product_id]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [fk_Employee_Product_Roles_Role_id] FOREIGN KEY([Role_id])
+REFERENCES [dbo].[Role] ([RoleId])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [fk_Employee_Product_Roles_Role_id]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [fk_product_categories_categoryid] FOREIGN KEY([Category_id])
+REFERENCES [dbo].[Category] ([CategotyId])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [fk_product_categories_categoryid]
+GO
+ALTER TABLE [dbo].[RefreshToken]  WITH CHECK ADD  CONSTRAINT [fk_Employee_RefreshToken_EmployeeId] FOREIGN KEY([EmployeeId])
+REFERENCES [dbo].[Employee] ([EmployeeId])
+GO
+ALTER TABLE [dbo].[RefreshToken] CHECK CONSTRAINT [fk_Employee_RefreshToken_EmployeeId]
+GO
